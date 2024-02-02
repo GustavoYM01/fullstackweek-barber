@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Header from "../_components/header";
+import Search from "./_components/search";
 
 export default function Home() {
   const showDate = () => {
@@ -26,6 +27,9 @@ export default function Home() {
           Olá, <b>Miguel!</b>
         </h2>
         <span className="text-sm">{showDate()}</span>
+      </div>
+      <div className="px-5 mt-6">
+        <Search />
       </div>
     </div>
   );

@@ -77,7 +77,9 @@ export default async function Home() {
         </h2>
         <div className="flex px-5 gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((x: any) => (
-            <BarbershopItem key={x.id} barbershop={x} />
+            <div key={x.id} className="min-w-[167px] max-w-[167px]">
+              <BarbershopItem key={x.id} barbershop={x} />
+            </div>
           ))}
         </div>
       </div>
@@ -87,7 +89,9 @@ export default async function Home() {
         </h2>
         <div className="flex px-5 gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((x: any) => (
-            <BarbershopItem key={x.id} barbershop={x} />
+            <div key={x.id} className="min-w-[167px] max-w-[167px]">
+              <BarbershopItem key={x.id} barbershop={x} />
+            </div>
           ))}
         </div>
       </div>

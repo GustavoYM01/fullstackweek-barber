@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Header from "../_components/header";
 import Search from "./_components/search";
 import BookingItem from "../_components/booking-item";

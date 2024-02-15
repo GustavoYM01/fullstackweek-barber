@@ -49,7 +49,9 @@ export default async function Home() {
       <Header />
       <div className="px-5 py-5">
         <h2 className="text-xl">
-          Olá, <b>Miguel!</b>
+          {session?.user
+            ? `Olá, ${session.user.name?.split(" ")[0]}`
+            : "Olá, vamos agendar um corte de cabelo hoje?"}
         </h2>
         <span className="text-sm">{showDate()}</span>
       </div>

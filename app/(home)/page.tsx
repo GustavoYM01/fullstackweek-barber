@@ -8,23 +8,29 @@ import { authOptions } from "../_lib/auth";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  const [barbershops, confirmedBookings] = await Promise.all([
-    db.barbershop.findMany({}),
-    session?.user
-      ? db.booking.findMany({
-          where: {
-            userId: (session.user as any).id,
-            date: {
-              gte: new Date(),
+  const [barbershops, recommendedBarbershops, confirmedBookings] =
+    await Promise.all([
+      db.barbershop.findMany({}),
+      db.barbershop.findMany({
+        orderBy: {
+          id: "asc",
+        },
+      }),
+      session?.user
+        ? db.booking.findMany({
+            where: {
+              userId: (session.user as any).id,
+              date: {
+                gte: new Date(),
+              },
             },
-          },
-          include: {
-            service: true,
-            barbershop: true,
-          },
-        })
-      : Promise.resolve([]),
-  ]);
+            include: {
+              service: true,
+              barbershop: true,
+            },
+          })
+        : Promise.resolve([]),
+    ]);
 
   const showDate = () => {
     const date = new Date()
@@ -88,7 +94,7 @@ export default async function Home() {
           Populares
         </h2>
         <div className="flex px-5 gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {barbershops.map((x: any) => (
+          {recommendedBarbershops.map((x: any) => (
             <div key={x.id} className="min-w-[167px] max-w-[167px]">
               <BarbershopItem key={x.id} barbershop={x} />
             </div>
